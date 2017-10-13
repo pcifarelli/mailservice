@@ -1,0 +1,9 @@
+bind = yes
+bind_dn = uid=postfix,ou=services,dc=example,dc=com
+bind_pw = {CRYPT}$5$oOYUYg6E$MxUeX5E6AZPOJmj.Vt1ChqNuUam7E4wYQAc0Y4QM8o8
+version = 3
+server_host = ldaps://pcifarelli.net
+search_base = ou=people,dc=pcifarelli,dc=net
+domain = pcifarelli.net
+query_filter = (&(mail=%s)(mailEnabled=TRUE))
+result_attribute = mail

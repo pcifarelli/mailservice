@@ -1,0 +1,3 @@
+START=yes
+MECH="ldap"
+OPTIONS="-c -m /var/run/saslauthd"

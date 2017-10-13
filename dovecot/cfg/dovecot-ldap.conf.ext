@@ -1,0 +1,15 @@
+hosts = pcifarelli.net
+uris = ldaps://pcifarelli.net
+dn = uid=dovecot,ou=services,dc=pcifarelli,dc=net
+dnpass = figure84u
+tls_ca_cert_file = /ssl/certs/ca-bundle.crt
+tls_require_cert = hard
+debug_level = 2
+ldap_version = 3
+base = ou=people,dc=pcifarelli,dc=net
+scope = subtree
+user_attrs = mailHomeDirectory=home,mailUidNumber=uid,mailGidNumber=gid,mailStorageDirectory=mail
+user_filter = (&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%n))
+pass_attrs = uniqueIdentifier=user,userPassword=password
+pass_filter = (&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%n))
+default_pass_scheme = SHA256-CRYPT
