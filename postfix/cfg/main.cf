@@ -714,7 +714,7 @@ smtpd_tls_auth_only = yes
 smtpd_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
 
 # Public Certificate
-smtpd_tls_cert_file = /ssl/certs/testaws_pcifarelli_net_fullchain.pem
+smtpd_tls_cert_file = /certs/testaws_pcifarelli_net_fullchain.pem
 
 # Private Key (without passphrase)
 smtpd_tls_key_file = /ssl/private/testaws_pcifarelli_net_privkey.pem

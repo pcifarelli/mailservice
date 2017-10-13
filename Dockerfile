@@ -6,6 +6,9 @@ RUN mkdir /container/bin
 RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyrus-sasl-lib cyrus-sasl-plain dovecot ca-certificates openldap-clients
 WORKDIR /container
 
+# copy public certs /certs
+ADD public_certs/ /certs
+
 # copy the current directory contents to the working directory
 ADD postfix/cfg/sasl /etc/postfix/sasl
 ADD postfix/cfg/certs /etc/postfix/certs
@@ -19,7 +22,7 @@ COPY postfix/cfg/virtual_domains /etc/postfix
 RUN mkdir -p /etc/sysconfig
 COPY postfix/cfg/network /etc/sysconfig
 COPY postfix/cfg/rsyslog.conf /etc
-COPY bin/postfix-entrypoint /container/bin
+COPY bin/mailservice-entrypoint /container/bin
 COPY bin/postfix.sh /container/bin
 RUN chmod +x /container/bin/postfix.sh
 COPY bin/rsyslog.sh /container/bin
@@ -79,4 +82,4 @@ ENV PATH ${PATH}:/bin
 #RUN pip install awscli --upgrade --user
 
 # need to map /ebsextra/keys -> /ssl
-ENTRYPOINT ["/container/bin/postfix-entrypoint"]
+ENTRYPOINT ["/container/bin/mailservice-entrypoint"]
