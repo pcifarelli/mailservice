@@ -3,11 +3,8 @@ FROM amazonlinux
 # set the working directory
 RUN mkdir /container
 RUN mkdir /container/bin
-RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyrus-sasl-lib cyrus-sasl-plain dovecot ca-certificates openldap-clients
+RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyrus-sasl-lib cyrus-sasl-plain dovecot ca-certificates openldap-clients python27 python27-boto3
 WORKDIR /container
-
-# copy public certs /certs
-ADD public_certs/ /certs
 
 # copy the current directory contents to the working directory
 ADD postfix/cfg/sasl /etc/postfix/sasl
@@ -57,7 +54,14 @@ RUN ln -s /etc/pki/nssdb/ /etc/openldap/certs
 RUN ln -s /etc/pki/nssdb/ /etc/openldap/cacerts
 COPY openldap/ldap.conf /etc/openldap
 
-VOLUME ["/ssl"]
+# setup certs
+RUN mkdir -p /ssl
+ADD public_certs/ /ssl/certs
+
+RUN mkdir -p /ssl/private
+COPY private/*.encrypted /ssl/private
+COPY bin/load_key.py /container/bin
+
 VOLUME ["/vmail"]
 EXPOSE 465
 EXPOSE 993
