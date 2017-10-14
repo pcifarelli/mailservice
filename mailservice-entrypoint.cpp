@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <iostream>
 
@@ -26,11 +27,13 @@ int main(int argc, char** argv)
     sigaction(SIGQUIT, &termaction, 0);
 
     const char *rsyslog_cmd = "/container/bin/rsyslog.sh";
+    const char *loadkey_cmd = "/container/bin/load_key.py";
     const char *saslauthd_cmd = "/container/bin/saslauthd.sh";
     const char *postfix_cmd = "/container/bin/postfix.sh";
     const char *dovecot_cmd = "/container/bin/dovecot.sh";
 
     start_command(rsyslog_cmd);
+    system(loadkey_cmd);
     start_command(saslauthd_cmd);
     start_command(postfix_cmd);
     start_command(dovecot_cmd);

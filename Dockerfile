@@ -3,7 +3,7 @@ FROM amazonlinux
 # set the working directory
 RUN mkdir /container
 RUN mkdir /container/bin
-RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyrus-sasl-lib cyrus-sasl-plain dovecot ca-certificates openldap-clients python27 python27-boto3
+RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyrus-sasl-lib cyrus-sasl-plain dovecot ca-certificates openldap-clients python27 python27-pip
 WORKDIR /container
 
 # copy the current directory contents to the working directory
@@ -55,6 +55,7 @@ RUN ln -s /etc/pki/nssdb/ /etc/openldap/cacerts
 COPY openldap/ldap.conf /etc/openldap
 
 # setup certs
+ENV AWS_DEFAULT_REGION us-east-1
 RUN mkdir -p /ssl
 ADD public_certs/ /ssl/certs
 
@@ -81,9 +82,10 @@ ENV PATH ${PATH}:/bin
 #RUN yum install -y net-tools
 #RUN yum install -y iputils
 #RUN yum install -y python27-pip
-#RUN pip install --upgrade pip
-#RUN pip install --upgrade setuptools
-#RUN pip install awscli --upgrade --user
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install awscli --upgrade --user
+RUN pip install boto3
 
 # need to map /ebsextra/keys -> /ssl
 ENTRYPOINT ["/container/bin/mailservice-entrypoint"]
