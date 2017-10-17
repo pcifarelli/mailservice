@@ -20,7 +20,7 @@ COPY postfix/cfg/ldap_virtual_recipients.cf /etc/postfix
 COPY postfix/cfg/virtual_domains /etc/postfix
 RUN mkdir -p /etc/sysconfig
 COPY postfix/cfg/network /etc/sysconfig
-COPY postfix/cfg/rsyslog.conf /etc
+COPY rsyslog/cfg/rsyslog.conf /etc
 COPY bin/mailservice-entrypoint /container/bin
 COPY bin/postfix.sh /container/bin
 RUN chmod +x /container/bin/postfix.sh

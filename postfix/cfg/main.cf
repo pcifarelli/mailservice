@@ -723,7 +723,7 @@ smtpd_tls_key_file = /ssl/private/testaws_pcifarelli_net_privkey.pem
 tls_random_source = dev:/dev/urandom
 
 # TLS related logging (0 for prod, 2 for debug)
-smtpd_tls_loglevel = 2
+smtpd_tls_loglevel = 0
 
 # Avoid Denial Of Service Attacks
 smtpd_client_new_tls_session_rate_limit = 10
