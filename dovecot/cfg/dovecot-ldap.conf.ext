@@ -6,7 +6,7 @@ tls_ca_cert_file = /ssl/certs/ca-bundle.crt
 tls_require_cert = hard
 debug_level = 2
 ldap_version = 3
-base = ou=people,dc=pcifarelli,dc=net
+base = ou=people,dc=testaws,dc=pcifarelli,dc=net
 scope = subtree
 user_attrs = mailHomeDirectory=home,mailUidNumber=uid,mailGidNumber=gid,mailStorageDirectory=mail
 user_filter = (&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%n))

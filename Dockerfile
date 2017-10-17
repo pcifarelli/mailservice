@@ -1,5 +1,6 @@
 FROM amazonlinux
 
+ARG SERVICE=all
 # set the working directory
 RUN mkdir /container
 RUN mkdir /container/bin
@@ -7,6 +8,7 @@ RUN yum update -y && yum install -y postfix rsyslog busybox bash cyrus-sasl cyru
 WORKDIR /container
 
 # copy the current directory contents to the working directory
+COPY bin/setup.sh /container/bin
 ADD postfix/cfg/sasl /etc/postfix/sasl
 ADD postfix/cfg/certs /etc/postfix/certs
 COPY postfix/cfg/drop.cidr /etc/postfix
@@ -56,6 +58,11 @@ COPY openldap/ldap.conf /etc/openldap
 
 # setup certs
 ENV AWS_DEFAULT_REGION us-east-1
+
+# "all" - start all programs
+# "postfix" - run only postfix and saslauthd
+# "dovecot" - run only dovecot
+ENV CMDS $SERVICE
 RUN mkdir -p /ssl
 ADD public_certs/ /ssl/certs
 
@@ -64,6 +71,7 @@ COPY private/*.encrypted /ssl/private
 COPY bin/load_key.py /container/bin
 
 VOLUME ["/vmail"]
+VOLUME ["/var/run"]
 EXPOSE 465
 EXPOSE 993
 

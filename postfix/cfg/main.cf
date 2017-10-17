@@ -72,7 +72,7 @@ mail_owner = postfix
 # from gethostname(). $myhostname is used as a default value for many
 # other configuration parameters.
 #
-myhostname = mail.pcifarelli.net
+myhostname = mail.testaws.pcifarelli.net
 append_dot_mydomain = no
 #myhostname = virtual.domain.tld
 
@@ -81,7 +81,7 @@ append_dot_mydomain = no
 # $mydomain is used as a default value for many other configuration
 # parameters.
 #
-mydomain = pcifarelli.net
+mydomain = testaws.pcifarelli.net
 
 # SENDING MAIL
 # 
