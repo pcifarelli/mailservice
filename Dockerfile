@@ -21,7 +21,7 @@ COPY postfix/cfg/virtual_domains /etc/postfix
 RUN mkdir -p /etc/sysconfig
 COPY postfix/cfg/network /etc/sysconfig
 COPY rsyslog/cfg/rsyslog.conf /etc
-COPY bin/mailservice-entrypoint /container/bin
+COPY bin/mailserviceentrypoint /container/bin
 COPY bin/postfix.sh /container/bin
 RUN chmod +x /container/bin/postfix.sh
 COPY bin/rsyslog.sh /container/bin
@@ -96,4 +96,4 @@ RUN pip install awscli --upgrade --user
 RUN pip install boto3
 
 # need to map /ebsextra/keys -> /ssl
-ENTRYPOINT ["/container/bin/mailservice-entrypoint"]
+ENTRYPOINT ["/container/bin/mailserviceentrypoint"]

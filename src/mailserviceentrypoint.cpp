@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     start_command(rsyslog_cmd);
     pid_t logpid = tail_log("/var/log/maillog");
 
-    system(loadkey_cmd);
+    int res = system(loadkey_cmd);
     int i = 0;
     while (cmds[i])
     {

@@ -1,0 +1,9 @@
+.deps/
+*.o
+*.cpp~
+*.h~
+*.am~
+*.la
+*.lo
+emailfetch
+.libs/
