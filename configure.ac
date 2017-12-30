@@ -4,15 +4,10 @@
 AC_PREREQ([2.69])
 AC_INIT([mailservice], [0.1], [paul.cifarelli@thomsonreuters.com])
 AC_CONFIG_SRCDIR([src/mailserviceentrypoint.cpp])
-#AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS(config.h)
 
-AM_INIT_AUTOMAKE([subdir-objects])
-
-# --enable-docker		build docker from amazonlinux (default) (Dockerfile=Dockerfile.amazonlinux)
-# --enable-docker=amazonlinux	build docker from amazonlinux (Dockerfile=Dockerfile.amazonlinux)
-# --enable-docker=ubuntu	build docker from ubuntu (Dockerfile=Dockerfile.ubuntu)
+# --enable-docker		build docker
 #
 AC_ARG_ENABLE([docker],
 [ --enable-docker		Build docker image],
